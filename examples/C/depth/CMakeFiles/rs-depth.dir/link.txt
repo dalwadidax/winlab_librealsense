@@ -1,0 +1,1 @@
+/usr/bin/cc  -pthread   -fPIC -pedantic -g -D_BSD_SOURCE   -mssse3 -O2 -g -DNDEBUG   CMakeFiles/rs-depth.dir/rs-depth.c.o  -o rs-depth -Wl,-rpath,/root/librealsense: ../../../librealsense2.so.2.13.0 /usr/lib/x86_64-linux-gnu/libGL.so /usr/lib/x86_64-linux-gnu/libGLU.so -lm /usr/lib/x86_64-linux-gnu/libglfw.so -lusb-1.0 

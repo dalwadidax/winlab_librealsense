@@ -23,8 +23,8 @@
 #define STREAM_INDEX    0                 // Defines the stream index, used for multiple streams of the same type //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 int main()
+
 {
     rs2_error* e = 0;
 
@@ -73,8 +73,10 @@ int main()
         printf("The connected device doesn't support color streaming!\n");
         exit(EXIT_FAILURE);
     }
-
-    while (1)
+        int j;
+	FILE *fp;
+        fp = fopen("colors-info.txt","w");
+    for(j=1;j<10;j++)
     {
         // This call waits until a new composite_frame is available
         // composite_frame holds a set of frames. It is used to prevent frame drops
@@ -113,13 +115,16 @@ int main()
             printf("RGB frame arrived.\n");
             printf("First 10 bytes: ");
             int i;
-            for(i=0; i < 10; ++i)
-                printf("%02x ", rgb_frame_data[i]);
+            fprintf(fp,"\nframe no : %d ", j);
+            for(i=0; i < 307200; ++i)
+               fprintf(fp,"%02x ", rgb_frame_data[i]);
 
             printf("\nFrame No: %llu\n", frame_number);
             printf("Timestamp: %f\n", frame_timestamp);
             printf("Timestamp domain: %s\n", frame_timestamp_domain_str);
             printf("Time of arrival: %lld\n\n", frame_metadata_time_of_arrival);
+            fprintf(fp,"\n");
+            
             rs2_release_frame(frame);
         }
 
@@ -137,6 +142,8 @@ int main()
     rs2_delete_device(dev);
     rs2_delete_device_list(device_list);
     rs2_delete_context(ctx);
+    fclose(fp);
+return EXIT_SUCCESS;
 
-    return EXIT_SUCCESS;
 }
+                                          
