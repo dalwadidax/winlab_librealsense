@@ -82,4 +82,4 @@ librealsense-log.txt
 *.json
 *.ini
 *.cxx
-
+*.bag
