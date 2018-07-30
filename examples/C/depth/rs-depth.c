@@ -130,8 +130,11 @@ int main()
 
     char buffer[BUFFER_SIZE];
     char* out = NULL;
-    while (1)
-    {
+    FILE *fp;
+    fp = fopen("depth-info","w");
+
+// while (1)
+   // {
         // This call waits until a new composite_frame is available
         // composite_frame holds a set of frames. It is used to prevent frame drops
         // The retunred object should be released with rs2_release_frame(...)
@@ -160,6 +163,10 @@ int main()
             /* Retrieve depth data, configured as 16-bit depth values */
             const uint16_t* depth_frame_data = (const uint16_t*)(rs2_get_frame_data(frame, &e));
             check_error(e);
+
+            int k;
+            for (k=0;k<307200;++k)
+            { fprintf(fp,"%x ",depth_frame_data[k]);}
 
             /* Print a simple text-based representation of the image, by breaking it into 10x5 pixel regions and approximating the coverage of pixels within one meter */
             out = buffer;
@@ -194,7 +201,7 @@ int main()
         }
 
         rs2_release_frame(frames);
-    }
+   // }
 
     // Stop the pipeline streaming
     rs2_pipeline_stop(pipeline, &e);
@@ -209,4 +216,4 @@ int main()
     rs2_delete_context(ctx);
 
     return EXIT_SUCCESS;
-}
+} 

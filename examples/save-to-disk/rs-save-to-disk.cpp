@@ -27,34 +27,35 @@ int main(int argc, char * argv[]) try
     pipe.start();
 
     // Capture 30 frames to give autoexposure, etc. a chance to settle
-    for (auto i = 0; i < 30; ++i) pipe.wait_for_frames();
+    for (auto i = 0; i < 30; ++i)
+	{ pipe.wait_for_frames();
 
     // Wait for the next set of frames from the camera. Now that autoexposure, etc.
     // has settled, we will write these to disk
-    for (auto&& frame : pipe.wait_for_frames())
-    {
+    	for (auto&& frame : pipe.wait_for_frames())
+   	 {
         // We can only save video frames as pngs, so we skip the rest
-        if (auto vf = frame.as<rs2::video_frame>())
-        {
-            auto stream = frame.get_profile().stream_type();
+        	if (auto vf = frame.as<rs2::video_frame>())
+        	{
+            	auto stream = frame.get_profile().stream_type();
             // Use the colorizer to get an rgb image for the depth stream
-            if (vf.is<rs2::depth_frame>()) vf = color_map(frame);
+           	 if (vf.is<rs2::depth_frame>()) vf = color_map(frame);
 
             // Write images to disk
-            std::stringstream png_file;
-            png_file << "rs-save-to-disk-output-" << vf.get_profile().stream_name() << ".png";
-            stbi_write_png(png_file.str().c_str(), vf.get_width(), vf.get_height(),
+            		std::stringstream png_file;
+           	 png_file << "rs-save-to-disk-output-" <<i<< vf.get_profile().stream_name() << ".png";
+            	stbi_write_png(png_file.str().c_str(), vf.get_width(), vf.get_height(),
                            vf.get_bytes_per_pixel(), vf.get_data(), vf.get_stride_in_bytes());
-            std::cout << "Saved " << png_file.str() << std::endl;
+           	 std::cout << "Saved " << png_file.str() << std::endl;
 
             // Record per-frame metadata for UVC streams
             std::stringstream csv_file;
-            csv_file << "rs-save-to-disk-output-" << vf.get_profile().stream_name()
+            csv_file << "rs-save-to-disk-output-" <<i<< vf.get_profile().stream_name()
                      << "-metadata.csv";
             metadata_to_csv(vf, csv_file.str());
         }
     }
-
+	}
     return EXIT_SUCCESS;
 }
 catch(const rs2::error & e)

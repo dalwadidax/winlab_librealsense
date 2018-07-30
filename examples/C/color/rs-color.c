@@ -75,9 +75,9 @@ int main()
     }
         int j;
 	FILE *fp;
-        fp = fopen("colors-info.txt","w");
-    for(j=1;j<10;j++)
-    {
+        fp = fopen("colors-info","w");
+  //  for(j=1;j<10;j++)
+  //  {
         // This call waits until a new composite_frame is available
         // composite_frame holds a set of frames. It is used to prevent frame drops
         // The retunred object should be released with rs2_release_frame(...)
@@ -115,21 +115,23 @@ int main()
             printf("RGB frame arrived.\n");
             printf("First 10 bytes: ");
             int i;
-            fprintf(fp,"\nframe no : %d ", j);
-            for(i=0; i < 307200; ++i)
-               fprintf(fp,"%02x ", rgb_frame_data[i]);
+		printf("%d",sizeof(rgb_frame_data));	    
+          //  fprintf(fp,"\nframe no : %d ", j);
+            for(i=0; i <921600; ++i)
+
+               fprintf(fp,"\%02x", rgb_frame_data[i]);
 
             printf("\nFrame No: %llu\n", frame_number);
             printf("Timestamp: %f\n", frame_timestamp);
             printf("Timestamp domain: %s\n", frame_timestamp_domain_str);
             printf("Time of arrival: %lld\n\n", frame_metadata_time_of_arrival);
-            fprintf(fp,"\n");
+           // fprintf(fp,"\n");
             
             rs2_release_frame(frame);
         }
 
         rs2_release_frame(frames);
-    }
+   // }
 
     // Stop the pipeline streaming
     rs2_pipeline_stop(pipeline, &e);
