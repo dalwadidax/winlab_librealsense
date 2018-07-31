@@ -165,8 +165,8 @@ int main()
             check_error(e);
 
             int k;
-            for (k=0;k<307200;++k)
-            { fprintf(fp,"%x ",depth_frame_data[k]);}
+            for (k=0;k<614400;++k)
+            { fprintf(fp,"%04x ",depth_frame_data[k]);}
 
             /* Print a simple text-based representation of the image, by breaking it into 10x5 pixel regions and approximating the coverage of pixels within one meter */
             out = buffer;
