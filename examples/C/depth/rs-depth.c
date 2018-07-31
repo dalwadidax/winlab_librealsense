@@ -154,7 +154,7 @@ int main()
 
             // Check if the given frame can be extended to depth frame interface
             // Accept only depth frames and skip other frames
-            if (0 == rs2_is_frame_extendable_to(frame, RS2_EXTENSION_DEPTH_FRAME, &e))
+           if (0 == rs2_is_frame_extendable_to(frame, RS2_EXTENSION_DEPTH_FRAME, &e))
             {
                 rs2_release_frame(frame);
                 continue;
@@ -165,7 +165,7 @@ int main()
             check_error(e);
 
             int k;
-            for (k=0;k<614400;++k)
+            for (k=0;k<307200;++k)
             { fprintf(fp,"%04x ",depth_frame_data[k]);}
 
             /* Print a simple text-based representation of the image, by breaking it into 10x5 pixel regions and approximating the coverage of pixels within one meter */
