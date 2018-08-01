@@ -28,7 +28,7 @@ int main(int argc, char * argv[]) try
 
     // Capture 30 frames to give autoexposure, etc. a chance to settle
     for (auto i = 0; i < 30; ++i)
-	{ pipe.wait_for_frames();
+	{ pipe.wait_for_frames();}
 
     // Wait for the next set of frames from the camera. Now that autoexposure, etc.
     // has settled, we will write these to disk
@@ -43,19 +43,19 @@ int main(int argc, char * argv[]) try
 
             // Write images to disk
             		std::stringstream png_file;
-           	 png_file << "rs-save-to-disk-output-" <<i<< vf.get_profile().stream_name() << ".png";
+           	 png_file << "rs-save-to-disk-output-" << vf.get_profile().stream_name() << ".png";
             	stbi_write_png(png_file.str().c_str(), vf.get_width(), vf.get_height(),
                            vf.get_bytes_per_pixel(), vf.get_data(), vf.get_stride_in_bytes());
            	 std::cout << "Saved " << png_file.str() << std::endl;
 
             // Record per-frame metadata for UVC streams
             std::stringstream csv_file;
-            csv_file << "rs-save-to-disk-output-" <<i<< vf.get_profile().stream_name()
+            csv_file << "rs-save-to-disk-output-" << vf.get_profile().stream_name()
                      << "-metadata.csv";
             metadata_to_csv(vf, csv_file.str());
         }
     }
-	}
+	
     return EXIT_SUCCESS;
 }
 catch(const rs2::error & e)

@@ -1,13 +1,13 @@
 Stream,Color
 Metadata Attribute,Value
-Frame Counter,173
-Frame Timestamp,819795458
-Sensor Timestamp,819795426
+Frame Counter,30
+Frame Timestamp,253975087
+Sensor Timestamp,253975055
 Actual Exposure,166
 Gain Level,64
 Auto Exposure,1
-Time Of Arrival,1532542205390
-Backend Timestamp,1532542205357
+Time Of Arrival,1533145288370
+Backend Timestamp,1533145288337
 Actual Fps,30
 Brightness,0
 Contrast,50
