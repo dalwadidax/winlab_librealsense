@@ -5,7 +5,7 @@
 #include "example.hpp"          // Include short list of convenience functions for rendering
 
 #include <algorithm>            // std::min, std::max
-
+#include <iostream>
 // Helper functions
 void register_glfw_callbacks(window& app, glfw_state& app_state);
 
@@ -37,9 +37,10 @@ int main(int argc, char * argv[]) try
 
         // Generate the pointcloud and texture mappings
         points = pc.calculate(depth);
-
+        // std::cout << points;
         auto color = frames.get_color_frame();
-
+        ptr_cloud cloud= points_to_pcl(points);
+        pcl::io::savePCDFile(filename+".pcd",*cloud);
         // For cameras that don't have RGB sensor, we'll map the pointcloud to infrared instead of color
         if (!color)
             color = frames.get_infrared_frame();

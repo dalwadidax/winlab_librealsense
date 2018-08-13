@@ -1,0 +1,3 @@
+/root/librealsense/wrappers/csharp/cs-tutorial-2-capture/CMakeFiles/rebuild_cache.dir
+/root/librealsense/wrappers/csharp/cs-tutorial-2-capture/CMakeFiles/cs-tutorial-2-capture.dir
+/root/librealsense/wrappers/csharp/cs-tutorial-2-capture/CMakeFiles/edit_cache.dir

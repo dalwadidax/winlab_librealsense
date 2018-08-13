@@ -41,7 +41,7 @@ float get_depth_unit_value(const rs2_device* const dev)
 
     int num_of_sensors = rs2_get_sensors_count(sensor_list, &e);
     check_error(e);
-
+   
     float depth_scale = 0;
     int is_depth_sensor_found = 0;
     int i;
@@ -76,8 +76,11 @@ float get_depth_unit_value(const rs2_device* const dev)
 
 
 int main()
-{
-    rs2_error* e = 0;
+{  
+    rs2_error* e =0;
+    
+    
+    
 
     // Create a context object. This object owns the handles to all connected realsense devices.
     // The returned object should be released with rs2_delete_context(...)
@@ -99,9 +102,11 @@ int main()
     // The returned object should be released with rs2_delete_device(...)
     rs2_device* dev = rs2_create_device(device_list, 0, &e);
     check_error(e);
-
+    
+    float scale =  get_depth_unit_value(dev);
+    printf ("\nthe scale is :%f\n",scale);
     print_device_info(dev);
-
+  
     /* Determine depth value corresponding to one meter */
     uint16_t one_meter = (uint16_t)(1.0f / get_depth_unit_value(dev));
 
@@ -162,11 +167,12 @@ int main()
 
             /* Retrieve depth data, configured as 16-bit depth values */
             const uint16_t* depth_frame_data = (const uint16_t*)(rs2_get_frame_data(frame, &e));
+            
             check_error(e);
 
             int k;
             for (k=0;k<307200;++k)
-            { fprintf(fp,"%04x ",depth_frame_data[k]);}
+            { fprintf(fp,"%04x ",scale*depth_frame_data[k]);}
 
             /* Print a simple text-based representation of the image, by breaking it into 10x5 pixel regions and approximating the coverage of pixels within one meter */
             out = buffer;

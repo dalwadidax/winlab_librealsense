@@ -1,0 +1,2 @@
+/root/librealsense/tutorial/CMakeFiles/rebuild_cache.dir
+/root/librealsense/tutorial/CMakeFiles/edit_cache.dir

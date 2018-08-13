@@ -71,6 +71,7 @@ int main(int argc, char * argv[]) try
 
     // Generate the pointcloud and texture mappings
     points = pc.calculate(depth);
+    
 
     auto pcl_points = points_to_pcl(points);
 

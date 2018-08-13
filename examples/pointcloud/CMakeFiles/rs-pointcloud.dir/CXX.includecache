@@ -13,6 +13,8 @@ example.hpp
 /root/librealsense/examples/pointcloud/example.hpp
 algorithm
 -
+iostream
+-
 
 examples/pointcloud/../example.hpp
 GLFW/glfw3.h
