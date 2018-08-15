@@ -42,7 +42,7 @@ pcl_ptr points_to_pcl(const rs2::points& points)
 }
 
 float3 colors[] { { 0.8f, 0.1f, 0.3f }, 
-                  { 0.1f, 0.9f, 0.5f },
+                  { 0.8f, 0.1f, 0.3f },
                 };
 
 int main(int argc, char * argv[]) try
